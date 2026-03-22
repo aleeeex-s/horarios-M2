@@ -8,197 +8,135 @@
 body {
     margin: 0;
     height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
+    font-family: "Segoe UI", -apple-system, sans-serif;
+    background: #121212;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* CONTENEDOR */
 .window {
     width: 700px;
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    background: rgba(28,28,30,0.9);
+    background: #181818;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
 }
 
+/* HEADER */
 .header {
     display: flex;
     align-items: center;
-    padding: 10px;
-    background: rgba(50,50,52,0.8);
+    padding: 12px 16px;
+    background: #000;
+    border-bottom: 1px solid #282828;
 }
-
-.dots {
-    display: flex;
-    gap: 8px;
-    margin-right: 10px;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-.red { background: #ff5f57; }
-.yellow { background: #febc2e; }
-.green { background: #28c840; }
 
 .title {
-    color: #ccc;
-    font-size: 14px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
 }
 
+/* CONTENIDO */
 .content {
     padding: 20px;
 }
 
+/* TABLA */
 table {
     width: 100%;
     border-collapse: collapse;
-    color: #e5e5e7;
+    color: #b3b3b3;
 }
 
 th {
     text-align: left;
     font-weight: 500;
-    color: #a1a1aa;
-    padding-bottom: 10px;
+    color: #b3b3b3;
+    padding-bottom: 12px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 td {
-    padding: 12px 8px;
+    padding: 14px 8px;
     vertical-align: top;
-    transition: all 0.25s ease;
+    transition: background 0.2s;
 }
 
-/* 🔥 HOVER PREMIUM FILA */
-tr {
-    transition: all 0.25s ease;
-}
-
+/* FILA HOVER */
 tr:hover td {
-    background: rgba(255,255,255,0.06);
-    border-radius: 10px;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    background: #282828;
 }
 
 /* DÍA */
 td:first-child {
-    color: #71717a;
     width: 120px;
-    font-weight: 500;
-    transition: 0.25s;
-}
-
-/* RESALTADO DEL DÍA */
-tr:hover td:first-child {
     color: #fff;
+    font-weight: 600;
 }
 
 /* ITEM */
 .item {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 /* BADGE */
 .badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 10px;
-    border-radius: 8px;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
     font-size: 13px;
-    transition: all 0.25s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-/* BRILLO INTERNO */
-.badge::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.3),
-        transparent
-    );
-    transition: 0.4s;
-}
-
-/* HOVER BADGE */
-.badge:hover {
-    transform: scale(1.05);
-}
-
-/* EFECTO BRILLO */
-.badge:hover::after {
-    left: 100%;
+    font-weight: 500;
+    background: #282828;
+    color: #fff;
+    transition: all 0.2s ease;
 }
 
 /* ICONO */
 .badge img {
     width: 16px;
     height: 16px;
-    border-radius: 4px;
-    transition: 0.25s;
+    border-radius: 3px;
 }
 
-/* ICONO CRECE */
-.badge:hover img {
-    transform: scale(1.15);
+/* HOVER BADGE */
+.badge:hover {
+    background: #1db954;
+    color: #000;
+    transform: scale(1.04);
 }
 
-/* COLORES */
+/* COLORES ESPECIALES */
 .handball {
-    background: #2563eb;
-    box-shadow: 0 0 0 rgba(37,99,235,0);
-}
-
-/* GLOW AZUL */
-.handball:hover {
-    box-shadow: 0 0 15px rgba(37,99,235,0.6);
+    border: 1px solid #1db954;
 }
 
 .clase {
-    background: #16a34a;
-}
-
-/* GLOW VERDE */
-.clase:hover {
-    box-shadow: 0 0 15px rgba(22,163,74,0.6);
+    border: 1px solid #535353;
 }
 
 .profe {
-    background: #ffffff;
+    background: #fff;
     color: #000;
 }
 
-/* GLOW BLANCO */
-.profe:hover {
-    box-shadow: 0 0 15px rgba(255,255,255,0.8);
-}
-
+/* HORA */
 .hora {
-    color: #a1a1aa;
+    color: #b3b3b3;
     font-size: 12px;
-    margin-left: 6px;
-    transition: 0.25s;
+    margin-left: 10px;
 }
 
-/* HORA DESTACA */
+/* RESALTAR HORA EN HOVER */
 tr:hover .hora {
-    color: #e5e5e7;
+    color: #fff;
 }
-
 </style>
 </head>
 
@@ -207,11 +145,6 @@ tr:hover .hora {
 <div class="window">
 
     <div class="header">
-        <div class="dots">
-            <div class="dot red"></div>
-            <div class="dot yellow"></div>
-            <div class="dot green"></div>
-        </div>
         <div class="title">Agenda</div>
     </div>
 
