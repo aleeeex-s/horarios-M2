@@ -2,151 +2,271 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Agenda Smartwatch</title>
+<title>Agenda</title>
 
 <style>
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: black;
-}
-
-/* SIDEBAR RELOJ */
-.sidebar {
-    width: 280px;
     height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
+}
+
+/* BOTÓN */
+.toggle-btn {
     position: fixed;
-    left: 0;
-    top: 0;
-    background: #000;
+    top: 20px;
+    right: 20px;
+    background: #2c2c2e;
     color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -750px; /* oculto */
+    width: 700px;
+    height: 100vh;
+    transition: 0.4s;
+    z-index: 999;
+}
+
+/* CUANDO ESTÁ ABIERTO */
+.sidebar.active {
+    right: 0;
+}
+
+/* TU VENTANA ORIGINAL */
+.window {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: -20px 0 50px rgba(0,0,0,0.5);
+    background: rgba(28,28,30,0.95);
+}
+
+/* HEADER */
+.header {
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    box-sizing: border-box;
+    align-items: center;
+    padding: 10px;
+    background: rgba(50,50,52,0.8);
 }
 
-/* HORA */
-.clock {
-    font-size: 48px;
-    font-weight: 600;
-    margin-bottom: 5px;
+.dots {
+    display: flex;
+    gap: 8px;
+    margin-right: 10px;
 }
 
-.day {
-    color: #888;
-    margin-bottom: 20px;
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
 }
 
-/* SECCIÓN */
-.section-title {
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
+.red { background: #ff5f57; }
+.yellow { background: #febc2e; }
+.green { background: #28c840; }
 
-/* EVENTO ACTUAL */
-.current {
-    background: #1f2937;
-    padding: 12px;
-    border-radius: 14px;
-    margin-bottom: 20px;
-}
-
-.current .name {
+.title {
+    color: #ccc;
     font-size: 14px;
+}
+
+.content {
+    padding: 20px;
+    overflow-y: auto;
+    height: calc(100vh - 40px);
+}
+
+/* TABLA */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #e5e5e7;
+}
+
+th {
+    text-align: left;
+    font-weight: 500;
+    color: #a1a1aa;
+    padding-bottom: 10px;
+}
+
+td {
+    padding: 12px 8px;
+    vertical-align: top;
+}
+
+tr:hover td {
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+}
+
+td:first-child {
+    color: #71717a;
+    width: 120px;
     font-weight: 500;
 }
 
-.current .time {
-    font-size: 12px;
-    color: #aaa;
-}
-
-/* LISTA */
-.event {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    border-radius: 10px;
+/* ITEM */
+.item {
     margin-bottom: 8px;
-    background: #111;
 }
 
-.event.handball { border-left: 4px solid #2563eb; }
-.event.clase { border-left: 4px solid #16a34a; }
-.event.profe { border-left: 4px solid #fff; }
-
-.event .name {
+/* BADGE */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 8px;
     font-size: 13px;
 }
 
-.event .time {
-    font-size: 11px;
-    color: #888;
+/* LOGO */
+.badge img {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
 }
 
-/* MAIN OPCIONAL */
-.main {
-    margin-left: 280px;
-    padding: 30px;
-    color: white;
+/* COLORES */
+.handball { background: #2563eb; }
+.clase { background: #16a34a; }
+.profe { background: #ffffff; color: #000; }
+
+.hora {
+    color: #a1a1aa;
+    font-size: 12px;
+    margin-left: 6px;
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="sidebar">
+<!-- BOTÓN -->
+<button class="toggle-btn" onclick="toggleSidebar()">Agenda</button>
 
-    <!-- HORA -->
-    <div class="clock" id="clock">00:00</div>
-    <div class="day" id="day">Lunes</div>
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
 
-    <!-- ACTUAL -->
-    <div class="section-title">AHORA</div>
-    <div class="current">
-        <div class="name">Prácticas Handball</div>
-        <div class="time">16:00 – 17:30</div>
+    <div class="window">
+
+        <div class="header">
+            <div class="dots">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+            </div>
+            <div class="title">Agenda</div>
+        </div>
+
+        <div class="content">
+            <table>
+                <tr>
+                    <th>Día</th>
+                    <th>Actividades</th>
+                </tr>
+
+                <tr>
+                    <td>Lunes</td>
+                    <td>
+                        <div class="item">
+                            <span class="badge handball">
+                                <img src="handball.png">
+                                Prácticas Handball - ESTADIO
+                            </span>
+                            <span class="hora">16:00 – 17:30</span>
+                        </div>
+                        <div class="item">
+                            <span class="badge clase">
+                                <img src="clases.png">
+                                Clase: Historia de las Ideas
+                            </span>
+                            <span class="hora">20:10 – 23:00</span>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Martes</td>
+                    <td>
+                        <div class="item">
+                            <span class="badge profe">
+                                <img src="handballprofe.jpg">
+                                Profe de Handball
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Miércoles</td>
+                    <td>
+                        <div class="item">
+                            <span class="badge handball">
+                                <img src="handball.png">
+                                Prácticas Handball - ESTADIO
+                            </span>
+                            <span class="hora">19:00 – 20:30</span>
+                        </div>
+                        <div class="item">
+                            <span class="badge clase">
+                                <img src="clases.png">
+                                Clase: UDI
+                            </span>
+                            <span class="hora">21:00 – 23:00</span>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Jueves</td>
+                    <td>
+                        <div class="item">
+                            <span class="badge profe">
+                                <img src="handballprofe.jpg">
+                                Profe de Handball
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Viernes</td>
+                    <td>
+                        <div class="item">
+                            <span class="badge handball">
+                                <img src="handball.png">
+                                Prácticas Handball - ESTADIO
+                            </span>
+                            <span class="hora">16:00 – 17:30</span>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
     </div>
 
-    <!-- SIGUIENTE -->
-    <div class="section-title">SIGUIENTE</div>
-
-    <div class="event clase">
-        <div class="name">Historia de las Ideas</div>
-        <div class="time">20:10 – 23:00</div>
-    </div>
-
-    <div class="event profe">
-        <div class="name">Profe de Handball</div>
-        <div class="time">Martes</div>
-    </div>
-
-</div>
-
-<div class="main">
-    <h1>Modo reloj inteligente</h1>
-    <p>Esto es opcional. Podés borrarlo.</p>
 </div>
 
 <script>
-// RELOJ EN VIVO
-function updateClock() {
-    const now = new Date();
-
-    let hours = now.getHours().toString().padStart(2, '0');
-    let minutes = now.getMinutes().toString().padStart(2, '0');
-
-    document.getElementById("clock").textContent = `${hours}:${minutes}`;
-
-    const days = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
-    document.getElementById("day").textContent = days[now.getDay()];
+function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("active");
 }
-
-setInterval(updateClock, 1000);
-updateClock();
 </script>
 
 </body>
