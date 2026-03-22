@@ -2,263 +2,172 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Agenda</title>
+<title>Agenda Smartwatch</title>
 
 <style>
 body {
     margin: 0;
     height: 100vh;
-    font-family: "Consolas", "Courier New", monospace;
     background: #000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* CONTENEDOR */
-.window {
-    width: 700px;
-    border-radius: 6px;
-    overflow: hidden;
+/* CONTENEDOR RELOJ */
+.watch {
+    width: 260px;
+    height: 520px;
     background: #000;
-    border: 1px solid #1f2937;
-    box-shadow: 0 0 40px rgba(0,0,0,0.9);
-}
-
-/* HEADER */
-.header {
+    border-radius: 40px;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 60px rgba(0,0,0,0.9);
     display: flex;
-    align-items: center;
-    padding: 10px;
-    background: #020617;
-    border-bottom: 1px solid #1f2937;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-.dots {
-    display: flex;
-    gap: 8px;
-    margin-right: 10px;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
-
-.red { background: #ef4444; }
-.yellow { background: #eab308; }
-.green { background: #22c55e; }
-
-.title {
-    color: #64748b;
-    font-size: 13px;
-    letter-spacing: 1px;
-}
-
-/* CONTENT */
+/* SCROLL */
 .content {
-    padding: 18px;
-}
-
-/* TABLA */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    color: #e5e7eb;
-    font-size: 13px;
-}
-
-th {
-    text-align: left;
-    font-weight: 400;
-    color: #334155;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #1f2937;
-}
-
-/* FILAS */
-td {
-    padding: 12px 8px;
-    vertical-align: top;
-    border-bottom: 1px solid #020617;
-}
-
-/* HOVER */
-tr:hover td {
-    background: rgba(59,130,246,0.05);
+    overflow-y: auto;
 }
 
 /* DÍA */
-td:first-child {
-    color: #475569;
-    width: 120px;
-    font-weight: 500;
+.day {
+    margin-bottom: 20px;
 }
 
-/* ITEM */
-.item {
-    margin-bottom: 6px;
+.day-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-/* BADGE */
-.badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    border: 1px solid transparent;
+/* EVENTO */
+.event {
+    background: #111;
+    border-radius: 16px;
+    padding: 10px;
+    margin-bottom: 8px;
 }
 
-/* LOGO */
-.badge img {
-    width: 14px;
-    height: 14px;
-    border-radius: 2px;
+/* COLORES */
+.event.handball {
+    border-left: 4px solid #2563eb;
 }
 
-/* COLORES TÁCTICOS */
-.handball {
-    color: #3b82f6;
-    border-color: rgba(59,130,246,0.3);
-    background: rgba(59,130,246,0.08);
+.event.clase {
+    border-left: 4px solid #16a34a;
 }
 
-.clase {
-    color: #22c55e;
-    border-color: rgba(34,197,94,0.3);
-    background: rgba(34,197,94,0.08);
+.event.profe {
+    border-left: 4px solid #fff;
 }
 
-.profe {
-    color: #e5e7eb;
-    border-color: rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.05);
+/* TEXTO */
+.event-title {
+    font-size: 13px;
+    margin-bottom: 4px;
 }
 
-/* HORA */
-.hora {
-    color: #334155;
+.event-time {
     font-size: 11px;
-    margin-left: 6px;
+    color: #888;
 }
 
-/* EFECTO TERMINAL SUTIL */
-.window::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(
-        rgba(255,255,255,0.02) 1px,
-        transparent 1px
-    );
-    background-size: 100% 3px;
-    opacity: 0.2;
+/* IMAGEN */
+.event img {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    vertical-align: middle;
+    border-radius: 4px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="window">
-
-    <div class="header">
-        <div class="dots">
-            <div class="dot red"></div>
-            <div class="dot yellow"></div>
-            <div class="dot green"></div>
-        </div>
-        <div class="title">AGENDA SYSTEM</div>
-    </div>
+<div class="watch">
 
     <div class="content">
-        <table>
-            <tr>
-                <th>Día</th>
-                <th>Actividades</th>
-            </tr>
 
-            <tr>
-                <td>Lunes</td>
-                <td>
-                    <div class="item">
-                        <span class="badge handball">
-                            <img src="handball.png">
-                            Prácticas Handball - ESTADIO
-                        </span>
-                        <span class="hora">16:00 – 17:30</span>
-                    </div>
-                    <div class="item">
-                        <span class="badge clase">
-                            <img src="clases.png">
-                            Clase: Historia de las Ideas
-                        </span>
-                        <span class="hora">20:10 – 23:00</span>
-                    </div>
-                </td>
-            </tr>
+        <div class="day">
+            <div class="day-name">Lunes</div>
 
-            <tr>
-                <td>Martes</td>
-                <td>
-                    <div class="item">
-                        <span class="badge profe">
-                            <img src="handballprofe.jpg">
-                            Profe de Handball
-                        </span>
-                    </div>
-                </td>
-            </tr>
+            <div class="event handball">
+                <div class="event-title">
+                    <img src="handball.png">
+                    Prácticas Handball - ESTADIO
+                </div>
+                <div class="event-time">16:00 – 17:30</div>
+            </div>
 
-            <tr>
-                <td>Miércoles</td>
-                <td>
-                    <div class="item">
-                        <span class="badge handball">
-                            <img src="handball.png">
-                            Prácticas Handball - ESTADIO
-                        </span>
-                        <span class="hora">19:00 – 20:30</span>
-                    </div>
-                    <div class="item">
-                        <span class="badge clase">
-                            <img src="clases.png">
-                            Clase: UDI
-                        </span>
-                        <span class="hora">21:00 – 23:00</span>
-                    </div>
-                </td>
-            </tr>
+            <div class="event clase">
+                <div class="event-title">
+                    <img src="clases.png">
+                    Clase: Historia de las Ideas
+                </div>
+                <div class="event-time">20:10 – 23:00</div>
+            </div>
+        </div>
 
-            <tr>
-                <td>Jueves</td>
-                <td>
-                    <div class="item">
-                        <span class="badge profe">
-                            <img src="handballprofe.jpg">
-                            Profe de Handball
-                        </span>
-                    </div>
-                </td>
-            </tr>
+        <div class="day">
+            <div class="day-name">Martes</div>
 
-            <tr>
-                <td>Viernes</td>
-                <td>
-                    <div class="item">
-                        <span class="badge handball">
-                            <img src="handball.png">
-                            Prácticas Handball - ESTADIO
-                        </span>
-                        <span class="hora">16:00 – 17:30</span>
-                    </div>
-                </td>
-            </tr>
+            <div class="event profe">
+                <div class="event-title">
+                    <img src="handballprofe.jpg">
+                    Profe de Handball
+                </div>
+            </div>
+        </div>
 
-        </table>
+        <div class="day">
+            <div class="day-name">Miércoles</div>
+
+            <div class="event handball">
+                <div class="event-title">
+                    <img src="handball.png">
+                    Prácticas Handball - ESTADIO
+                </div>
+                <div class="event-time">19:00 – 20:30</div>
+            </div>
+
+            <div class="event clase">
+                <div class="event-title">
+                    <img src="clases.png">
+                    Clase: UDI
+                </div>
+                <div class="event-time">21:00 – 23:00</div>
+            </div>
+        </div>
+
+        <div class="day">
+            <div class="day-name">Jueves</div>
+
+            <div class="event profe">
+                <div class="event-title">
+                    <img src="handballprofe.jpg">
+                    Profe de Handball
+                </div>
+            </div>
+        </div>
+
+        <div class="day">
+            <div class="day-name">Viernes</div>
+
+            <div class="event handball">
+                <div class="event-title">
+                    <img src="handball.png">
+                    Prácticas Handball - ESTADIO
+                </div>
+                <div class="event-time">16:00 – 17:30</div>
+            </div>
+        </div>
+
     </div>
 
 </div>
