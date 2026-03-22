@@ -8,44 +8,32 @@
 body {
     margin: 0;
     height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-
-    /* FONDO MÁS VIVO */
-    background: linear-gradient(135deg, #0f172a, #1e293b, #020617);
+    font-family: "Consolas", "Courier New", monospace;
+    background: #000;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* CONTENEDOR VIDRIO */
+/* CONTENEDOR */
 .window {
     width: 700px;
-    border-radius: 20px;
+    border-radius: 6px;
     overflow: hidden;
-
-    /* EFECTO GLASS */
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    border: 1px solid rgba(255,255,255,0.1);
-
-    box-shadow:
-        0 25px 60px rgba(0,0,0,0.6),
-        inset 0 1px 0 rgba(255,255,255,0.08);
+    background: #000;
+    border: 1px solid #1f2937;
+    box-shadow: 0 0 40px rgba(0,0,0,0.9);
 }
 
 /* HEADER */
 .header {
     display: flex;
     align-items: center;
-    padding: 12px;
-
-    background: rgba(255,255,255,0.04);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 10px;
+    background: #020617;
+    border-bottom: 1px solid #1f2937;
 }
 
-/* DOTS */
 .dots {
     display: flex;
     gap: 8px;
@@ -53,61 +41,64 @@ body {
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
 }
 
-.red { background: #ff5f57; }
-.yellow { background: #febc2e; }
-.green { background: #28c840; }
+.red { background: #ef4444; }
+.yellow { background: #eab308; }
+.green { background: #22c55e; }
 
 .title {
-    color: rgba(255,255,255,0.7);
-    font-size: 14px;
+    color: #64748b;
+    font-size: 13px;
+    letter-spacing: 1px;
 }
 
 /* CONTENT */
 .content {
-    padding: 20px;
+    padding: 18px;
 }
 
 /* TABLA */
 table {
     width: 100%;
     border-collapse: collapse;
-    color: rgba(255,255,255,0.85);
+    color: #e5e7eb;
+    font-size: 13px;
 }
 
 th {
     text-align: left;
-    font-weight: 500;
-    color: rgba(255,255,255,0.5);
-    padding-bottom: 10px;
+    font-weight: 400;
+    color: #334155;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #1f2937;
 }
 
 /* FILAS */
 td {
     padding: 12px 8px;
     vertical-align: top;
-    transition: 0.2s;
+    border-bottom: 1px solid #020617;
 }
 
+/* HOVER */
 tr:hover td {
-    background: rgba(255,255,255,0.06);
-    border-radius: 10px;
+    background: rgba(59,130,246,0.05);
 }
 
 /* DÍA */
 td:first-child {
-    color: rgba(255,255,255,0.4);
+    color: #475569;
     width: 120px;
     font-weight: 500;
 }
 
 /* ITEM */
 .item {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 /* BADGE */
@@ -115,43 +106,58 @@ td:first-child {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 10px;
-    border-radius: 10px;
-    font-size: 13px;
-
-    backdrop-filter: blur(10px);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    border: 1px solid transparent;
 }
 
 /* LOGO */
 .badge img {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
 }
 
-/* COLORES GLASS */
+/* COLORES TÁCTICOS */
 .handball {
-    background: rgba(37, 99, 235, 0.3);
-    border: 1px solid rgba(37, 99, 235, 0.4);
+    color: #3b82f6;
+    border-color: rgba(59,130,246,0.3);
+    background: rgba(59,130,246,0.08);
 }
 
 .clase {
-    background: rgba(22, 163, 74, 0.3);
-    border: 1px solid rgba(22, 163, 74, 0.4);
+    color: #22c55e;
+    border-color: rgba(34,197,94,0.3);
+    background: rgba(34,197,94,0.08);
 }
 
 .profe {
-    background: rgba(255,255,255,0.8);
-    color: black;
+    color: #e5e7eb;
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05);
 }
 
 /* HORA */
 .hora {
-    color: rgba(255,255,255,0.5);
-    font-size: 12px;
+    color: #334155;
+    font-size: 11px;
     margin-left: 6px;
 }
 
+/* EFECTO TERMINAL SUTIL */
+.window::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        rgba(255,255,255,0.02) 1px,
+        transparent 1px
+    );
+    background-size: 100% 3px;
+    opacity: 0.2;
+}
 </style>
 </head>
 
@@ -165,7 +171,7 @@ td:first-child {
             <div class="dot yellow"></div>
             <div class="dot green"></div>
         </div>
-        <div class="title">Agenda</div>
+        <div class="title">AGENDA SYSTEM</div>
     </div>
 
     <div class="content">
