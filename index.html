@@ -2,44 +2,64 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Agenda</title>
+<title>Agenda HUD</title>
 
 <style>
 body {
     margin: 0;
     height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #ffffff;
+    font-family: "Segoe UI", sans-serif;
+    background: radial-gradient(circle at center, #020617, #000);
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #e2e8f0;
 }
 
 /* CONTENEDOR */
 .window {
-    width: 700px;
-    border-radius: 10px;
-    background: #ffffff;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
-    overflow: hidden;
+    width: 750px;
+    border: 1px solid rgba(0,255,255,0.2);
+    border-radius: 12px;
+    padding: 20px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    box-shadow:
+        0 0 20px rgba(0,255,255,0.2),
+        inset 0 0 20px rgba(0,255,255,0.05);
+    position: relative;
+}
+
+/* ESQUINAS RECORTADAS */
+.window::before,
+.window::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(0,255,255,0.4);
+}
+
+.window::before {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.window::after {
+    bottom: -2px;
+    right: -2px;
+    border-left: none;
+    border-top: none;
 }
 
 /* HEADER */
 .header {
-    padding: 18px 20px;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.title {
-    font-size: 15px;
-    font-weight: 500;
-    color: #111;
-    letter-spacing: 0.5px;
-}
-
-/* CONTENIDO */
-.content {
-    padding: 20px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #22d3ee;
+    margin-bottom: 15px;
 }
 
 /* TABLA */
@@ -50,30 +70,28 @@ table {
 
 th {
     text-align: left;
-    font-weight: 500;
-    color: #999;
-    font-size: 12px;
+    font-size: 11px;
+    color: #64748b;
     padding-bottom: 10px;
-    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(0,255,255,0.2);
 }
 
 td {
-    padding: 16px 8px;
+    padding: 12px 8px;
     vertical-align: top;
-    border-bottom: 1px solid #f0f0f0;
-    transition: 0.2s;
+    border-bottom: 1px solid rgba(0,255,255,0.05);
 }
 
-/* HOVER SUTIL */
+/* FILA HOVER */
 tr:hover td {
-    background: #fafafa;
+    background: rgba(0,255,255,0.05);
 }
 
 /* DÍA */
 td:first-child {
     width: 120px;
+    color: #22d3ee;
     font-weight: 500;
-    color: #111;
 }
 
 /* ITEM */
@@ -85,43 +103,56 @@ td:first-child {
 .badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 0;
-    font-size: 14px;
-    color: #111;
+    gap: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    border: 1px solid rgba(0,255,255,0.2);
+    border-radius: 6px;
+    background: rgba(0,255,255,0.05);
+    position: relative;
+    overflow: hidden;
+    transition: 0.25s;
+}
+
+/* EFECTO ESCANEO */
+.badge::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,255,255,0.3), transparent);
+    animation: scan 4s linear infinite;
+}
+
+@keyframes scan {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
 
 /* ICONO */
 .badge img {
-    width: 16px;
-    height: 16px;
-    border-radius: 3px;
-    opacity: 0.7;
+    width: 14px;
+    height: 14px;
 }
 
-/* LÍNEA IZQUIERDA TIPO TESLA */
-.handball {
-    border-left: 2px solid #111;
-    padding-left: 10px;
-}
+/* COLORES */
+.handball { border-color: #38bdf8; }
+.clase { border-color: #22c55e; }
+.profe { border-color: #e5e7eb; }
 
-.clase {
-    border-left: 2px solid #666;
-    padding-left: 10px;
-}
-
-.profe {
-    border-left: 2px solid #ccc;
-    padding-left: 10px;
+/* HOVER BADGE */
+.badge:hover {
+    box-shadow: 0 0 10px rgba(0,255,255,0.6);
+    transform: scale(1.05);
 }
 
 /* HORA */
 .hora {
-    display: block;
-    margin-left: 26px;
-    font-size: 12px;
-    color: #777;
-    margin-top: 2px;
+    font-size: 11px;
+    color: #94a3b8;
+    margin-left: 6px;
 }
 </style>
 </head>
@@ -130,96 +161,92 @@ td:first-child {
 
 <div class="window">
 
-    <div class="header">
-        <div class="title">Agenda</div>
-    </div>
+    <div class="header">AGENDA SYSTEM</div>
 
-    <div class="content">
-        <table>
-            <tr>
-                <th>Día</th>
-                <th>Actividades</th>
-            </tr>
+    <table>
+        <tr>
+            <th>DÍA</th>
+            <th>ACTIVIDADES</th>
+        </tr>
 
-            <tr>
-                <td>Lunes</td>
-                <td>
-                    <div class="item">
-                        <span class="badge handball">
-                            <img src="handball.png">
-                            Prácticas Handball - ESTADIO
-                        </span>
-                        <span class="hora">16:00 – 17:30</span>
-                    </div>
-                    <div class="item">
-                        <span class="badge clase">
-                            <img src="clases.png">
-                            Clase: Historia de las Ideas
-                        </span>
-                        <span class="hora">20:10 – 23:00</span>
-                    </div>
-                </td>
-            </tr>
+        <tr>
+            <td>Lunes</td>
+            <td>
+                <div class="item">
+                    <span class="badge handball">
+                        <img src="handball.png">
+                        Handball - ESTADIO
+                    </span>
+                    <span class="hora">16:00 – 17:30</span>
+                </div>
+                <div class="item">
+                    <span class="badge clase">
+                        <img src="clases.png">
+                        Historia de las Ideas
+                    </span>
+                    <span class="hora">20:10 – 23:00</span>
+                </div>
+            </td>
+        </tr>
 
-            <tr>
-                <td>Martes</td>
-                <td>
-                    <div class="item">
-                        <span class="badge profe">
-                            <img src="handballprofe.jpg">
-                            Profe de Handball
-                        </span>
-                    </div>
-                </td>
-            </tr>
+        <tr>
+            <td>Martes</td>
+            <td>
+                <div class="item">
+                    <span class="badge profe">
+                        <img src="handballprofe.jpg">
+                        Profe de Handball
+                    </span>
+                </div>
+            </td>
+        </tr>
 
-            <tr>
-                <td>Miércoles</td>
-                <td>
-                    <div class="item">
-                        <span class="badge handball">
-                            <img src="handball.png">
-                            Prácticas Handball - ESTADIO
-                        </span>
-                        <span class="hora">19:00 – 20:30</span>
-                    </div>
-                    <div class="item">
-                        <span class="badge clase">
-                            <img src="clases.png">
-                            Clase: UDI
-                        </span>
-                        <span class="hora">21:00 – 23:00</span>
-                    </div>
-                </td>
-            </tr>
+        <tr>
+            <td>Miércoles</td>
+            <td>
+                <div class="item">
+                    <span class="badge handball">
+                        <img src="handball.png">
+                        Handball - ESTADIO
+                    </span>
+                    <span class="hora">19:00 – 20:30</span>
+                </div>
+                <div class="item">
+                    <span class="badge clase">
+                        <img src="clases.png">
+                        UDI
+                    </span>
+                    <span class="hora">21:00 – 23:00</span>
+                </div>
+            </td>
+        </tr>
 
-            <tr>
-                <td>Jueves</td>
-                <td>
-                    <div class="item">
-                        <span class="badge profe">
-                            <img src="handballprofe.jpg">
-                            Profe de Handball
-                        </span>
-                    </div>
-                </td>
-            </tr>
+        <tr>
+            <td>Jueves</td>
+            <td>
+                <div class="item">
+                    <span class="badge profe">
+                        <img src="handballprofe.jpg">
+                        Profe de Handball
+                    </span>
+                </div>
+            </td>
+        </tr>
 
-            <tr>
-                <td>Viernes</td>
-                <td>
-                    <div class="item">
-                        <span class="badge handball">
-                            <img src="handball.png">
-                            Prácticas Handball - ESTADIO
-                        </span>
-                        <span class="hora">16:00 – 17:30</span>
-                    </div>
-                </td>
-            </tr>
+        <tr>
+            <td>Viernes</td>
+            <td>
+                <div class="item">
+                    <span class="badge handball">
+                        <img src="handball.png">
+                        Handball - ESTADIO
+                    </span>
+                    <span class="hora">16:00 – 17:30</span>
+                </div>
+            </td>
+        </tr>
 
-        </table>
-    </div>
+    </table>
 
 </div>
 
