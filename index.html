@@ -9,165 +9,297 @@ body {
     margin: 0;
     height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #0f172a;
+    background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* CONTENEDOR */
-.calendar {
-    width: 900px;
-    height: 600px;
-    background: #020617;
-    border-radius: 20px;
-    padding: 20px;
-    box-sizing: border-box;
+.window {
+    width: 700px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    background: rgba(28,28,30,0.9);
+}
+
+.header {
     display: flex;
-    gap: 10px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-}
-
-/* COLUMNA DÍA */
-.day {
-    flex: 1;
-    background: #020617;
-    border-radius: 12px;
+    align-items: center;
     padding: 10px;
-    position: relative;
+    background: rgba(50,50,52,0.8);
 }
 
-/* TÍTULO */
-.day-title {
-    text-align: center;
-    color: #94a3b8;
-    margin-bottom: 10px;
-    font-size: 13px;
+.dots {
+    display: flex;
+    gap: 8px;
+    margin-right: 10px;
 }
 
-/* GRID HORARIO */
-.grid {
-    position: relative;
-    height: 100%;
-    border-left: 1px solid #1e293b;
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
 }
 
-/* LÍNEAS DE HORA */
-.hour-line {
-    position: absolute;
-    left: 0;
+.red { background: #ff5f57; }
+.yellow { background: #febc2e; }
+.green { background: #28c840; }
+
+.title {
+    color: #ccc;
+    font-size: 14px;
+}
+
+.content {
+    padding: 20px;
+}
+
+table {
     width: 100%;
-    height: 1px;
-    background: #1e293b;
+    border-collapse: collapse;
+    color: #e5e5e7;
 }
 
-/* BLOQUES */
-.event {
-    position: absolute;
-    left: 5px;
-    right: 5px;
+th {
+    text-align: left;
+    font-weight: 500;
+    color: #a1a1aa;
+    padding-bottom: 10px;
+}
+
+td {
+    padding: 12px 8px;
+    vertical-align: top;
+    transition: all 0.25s ease;
+}
+
+/* 🔥 HOVER PREMIUM FILA */
+tr {
+    transition: all 0.25s ease;
+}
+
+tr:hover td {
+    background: rgba(255,255,255,0.06);
     border-radius: 10px;
-    padding: 6px;
-    font-size: 11px;
-    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* DÍA */
+td:first-child {
+    color: #71717a;
+    width: 120px;
+    font-weight: 500;
+    transition: 0.25s;
+}
+
+/* RESALTADO DEL DÍA */
+tr:hover td:first-child {
+    color: #fff;
+}
+
+/* ITEM */
+.item {
+    margin-bottom: 8px;
+}
+
+/* BADGE */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    transition: all 0.25s ease;
+    position: relative;
     overflow: hidden;
 }
 
+/* BRILLO INTERNO */
+.badge::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+    );
+    transition: 0.4s;
+}
+
+/* HOVER BADGE */
+.badge:hover {
+    transform: scale(1.05);
+}
+
+/* EFECTO BRILLO */
+.badge:hover::after {
+    left: 100%;
+}
+
+/* ICONO */
+.badge img {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    transition: 0.25s;
+}
+
+/* ICONO CRECE */
+.badge:hover img {
+    transform: scale(1.15);
+}
+
 /* COLORES */
-.handball { background: #2563eb; }
-.clase { background: #16a34a; }
-.profe { background: #ffffff; color: black; }
-
-/* TEXTO */
-.event-title {
-    font-weight: 500;
-    font-size: 11px;
+.handball {
+    background: #2563eb;
+    box-shadow: 0 0 0 rgba(37,99,235,0);
 }
 
-.event-time {
-    font-size: 10px;
-    opacity: 0.8;
+/* GLOW AZUL */
+.handball:hover {
+    box-shadow: 0 0 15px rgba(37,99,235,0.6);
 }
+
+.clase {
+    background: #16a34a;
+}
+
+/* GLOW VERDE */
+.clase:hover {
+    box-shadow: 0 0 15px rgba(22,163,74,0.6);
+}
+
+.profe {
+    background: #ffffff;
+    color: #000;
+}
+
+/* GLOW BLANCO */
+.profe:hover {
+    box-shadow: 0 0 15px rgba(255,255,255,0.8);
+}
+
+.hora {
+    color: #a1a1aa;
+    font-size: 12px;
+    margin-left: 6px;
+    transition: 0.25s;
+}
+
+/* HORA DESTACA */
+tr:hover .hora {
+    color: #e5e5e7;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="calendar">
+<div class="window">
 
-    <!-- LUNES -->
-    <div class="day">
-        <div class="day-title">Lunes</div>
-        <div class="grid">
-
-            <!-- 16:00–17:30 -->
-            <div class="event handball" style="top: 160px; height: 90px;">
-                <div class="event-title">Handball</div>
-                <div class="event-time">16:00 – 17:30</div>
-            </div>
-
-            <!-- 20:10–23:00 -->
-            <div class="event clase" style="top: 250px; height: 170px;">
-                <div class="event-title">Historia</div>
-                <div class="event-time">20:10 – 23:00</div>
-            </div>
-
+    <div class="header">
+        <div class="dots">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
         </div>
+        <div class="title">Agenda</div>
     </div>
 
-    <!-- MARTES -->
-    <div class="day">
-        <div class="day-title">Martes</div>
-        <div class="grid">
+    <div class="content">
+        <table>
+            <tr>
+                <th>Día</th>
+                <th>Actividades</th>
+            </tr>
 
-            <div class="event profe" style="top: 200px; height: 60px;">
-                <div class="event-title">Profe</div>
-            </div>
+            <tr>
+                <td>Lunes</td>
+                <td>
+                    <div class="item">
+                        <span class="badge handball">
+                            <img src="handball.png">
+                            Prácticas Handball - ESTADIO
+                        </span>
+                        <span class="hora">16:00 – 17:30</span>
+                    </div>
+                    <div class="item">
+                        <span class="badge clase">
+                            <img src="clases.png">
+                            Clase: Historia de las Ideas
+                        </span>
+                        <span class="hora">20:10 – 23:00</span>
+                    </div>
+                </td>
+            </tr>
 
-        </div>
-    </div>
+            <tr>
+                <td>Martes</td>
+                <td>
+                    <div class="item">
+                        <span class="badge profe">
+                            <img src="handballprofe.jpg">
+                            Profe de Handball
+                        </span>
+                    </div>
+                </td>
+            </tr>
 
-    <!-- MIÉRCOLES -->
-    <div class="day">
-        <div class="day-title">Miércoles</div>
-        <div class="grid">
+            <tr>
+                <td>Miércoles</td>
+                <td>
+                    <div class="item">
+                        <span class="badge handball">
+                            <img src="handball.png">
+                            Prácticas Handball - ESTADIO
+                        </span>
+                        <span class="hora">19:00 – 20:30</span>
+                    </div>
+                    <div class="item">
+                        <span class="badge clase">
+                            <img src="clases.png">
+                            Clase: UDI
+                        </span>
+                        <span class="hora">21:00 – 23:00</span>
+                    </div>
+                </td>
+            </tr>
 
-            <div class="event handball" style="top: 220px; height: 90px;">
-                <div class="event-title">Handball</div>
-                <div class="event-time">19:00 – 20:30</div>
-            </div>
+            <tr>
+                <td>Jueves</td>
+                <td>
+                    <div class="item">
+                        <span class="badge profe">
+                            <img src="handballprofe.jpg">
+                            Profe de Handball
+                        </span>
+                    </div>
+                </td>
+            </tr>
 
-            <div class="event clase" style="top: 300px; height: 120px;">
-                <div class="event-title">UDI</div>
-                <div class="event-time">21:00 – 23:00</div>
-            </div>
+            <tr>
+                <td>Viernes</td>
+                <td>
+                    <div class="item">
+                        <span class="badge handball">
+                            <img src="handball.png">
+                            Prácticas Handball - ESTADIO
+                        </span>
+                        <span class="hora">16:00 – 17:30</span>
+                    </div>
+                </td>
+            </tr>
 
-        </div>
-    </div>
-
-    <!-- JUEVES -->
-    <div class="day">
-        <div class="day-title">Jueves</div>
-        <div class="grid">
-
-            <div class="event profe" style="top: 200px; height: 60px;">
-                <div class="event-title">Profe</div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- VIERNES -->
-    <div class="day">
-        <div class="day-title">Viernes</div>
-        <div class="grid">
-
-            <div class="event handball" style="top: 160px; height: 90px;">
-                <div class="event-title">Handball</div>
-                <div class="event-time">16:00 – 17:30</div>
-            </div>
-
-        </div>
+        </table>
     </div>
 
 </div>
