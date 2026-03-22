@@ -12,37 +12,16 @@ body {
     background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
 }
 
-/* BOTÓN */
-.toggle-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #2c2c2e;
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 10px;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-/* SIDEBAR */
+/* SIDEBAR DERECHA */
 .sidebar {
     position: fixed;
     top: 0;
-    right: -750px; /* oculto */
+    right: 0;
     width: 700px;
     height: 100vh;
-    transition: 0.4s;
-    z-index: 999;
 }
 
-/* CUANDO ESTÁ ABIERTO */
-.sidebar.active {
-    right: 0;
-}
-
-/* TU VENTANA ORIGINAL */
+/* TU VENTANA ORIGINAL ADAPTADA */
 .window {
     width: 100%;
     height: 100%;
@@ -50,6 +29,8 @@ body {
     overflow: hidden;
     box-shadow: -20px 0 50px rgba(0,0,0,0.5);
     background: rgba(28,28,30,0.95);
+    display: flex;
+    flex-direction: column;
 }
 
 /* HEADER */
@@ -81,10 +62,11 @@ body {
     font-size: 14px;
 }
 
+/* CONTENT SCROLL */
 .content {
     padding: 20px;
     overflow-y: auto;
-    height: calc(100vh - 40px);
+    flex: 1;
 }
 
 /* TABLA */
@@ -155,11 +137,7 @@ td:first-child {
 
 <body>
 
-<!-- BOTÓN -->
-<button class="toggle-btn" onclick="toggleSidebar()">Agenda</button>
-
-<!-- SIDEBAR -->
-<div class="sidebar" id="sidebar">
+<div class="sidebar">
 
     <div class="window">
 
@@ -262,12 +240,6 @@ td:first-child {
     </div>
 
 </div>
-
-<script>
-function toggleSidebar() {
-    document.getElementById("sidebar").classList.toggle("active");
-}
-</script>
 
 </body>
 </html>
