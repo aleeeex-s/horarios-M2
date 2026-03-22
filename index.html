@@ -7,6 +7,7 @@
 <style>
 body {
     margin: 0;
+    height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     background: #0f172a;
     display: flex;
@@ -14,195 +15,159 @@ body {
     align-items: center;
 }
 
-/* CONTENEDOR APP */
-.app {
-    width: 360px;
-    height: 640px;
+/* CONTENEDOR */
+.calendar {
+    width: 900px;
+    height: 600px;
     background: #020617;
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-    display: flex;
-    flex-direction: column;
-}
-
-/* HEADER */
-.header {
+    border-radius: 20px;
     padding: 20px;
-    font-size: 20px;
-    font-weight: 600;
-    color: white;
+    box-sizing: border-box;
+    display: flex;
+    gap: 10px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
 }
 
-/* SCROLL */
-.content {
-    padding: 15px;
-    overflow-y: auto;
-}
-
-/* DÍA */
+/* COLUMNA DÍA */
 .day {
-    margin-bottom: 20px;
+    flex: 1;
+    background: #020617;
+    border-radius: 12px;
+    padding: 10px;
+    position: relative;
 }
 
+/* TÍTULO */
 .day-title {
-    color: #64748b;
-    font-size: 13px;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-}
-
-/* CARD */
-.card {
-    background: #111827;
-    border-radius: 16px;
-    padding: 12px;
+    text-align: center;
+    color: #94a3b8;
     margin-bottom: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    font-size: 13px;
 }
 
-/* EVENTO */
+/* GRID HORARIO */
+.grid {
+    position: relative;
+    height: 100%;
+    border-left: 1px solid #1e293b;
+}
+
+/* LÍNEAS DE HORA */
+.hour-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #1e293b;
+}
+
+/* BLOQUES */
 .event {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    border-radius: 10px;
+    padding: 6px;
+    font-size: 11px;
+    color: white;
+    overflow: hidden;
 }
 
-/* IZQUIERDA */
-.event-left {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* ICONO */
-.event img {
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
-}
+/* COLORES */
+.handball { background: #2563eb; }
+.clase { background: #16a34a; }
+.profe { background: #ffffff; color: black; }
 
 /* TEXTO */
-.event-name {
-    color: white;
-    font-size: 14px;
+.event-title {
+    font-weight: 500;
+    font-size: 11px;
 }
 
-/* HORA */
 .event-time {
-    font-size: 12px;
-    color: #9ca3af;
+    font-size: 10px;
+    opacity: 0.8;
 }
-
-/* COLORES LATERALES */
-.handball { border-left: 4px solid #2563eb; }
-.clase { border-left: 4px solid #16a34a; }
-.profe { border-left: 4px solid #ffffff; }
-
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="calendar">
 
-    <div class="header">Agenda</div>
+    <!-- LUNES -->
+    <div class="day">
+        <div class="day-title">Lunes</div>
+        <div class="grid">
 
-    <div class="content">
-
-        <!-- LUNES -->
-        <div class="day">
-            <div class="day-title">Lunes</div>
-
-            <div class="card handball">
-                <div class="event">
-                    <div class="event-left">
-                        <img src="handball.png">
-                        <div class="event-name">Prácticas Handball - ESTADIO</div>
-                    </div>
-                    <div class="event-time">16:00 – 17:30</div>
-                </div>
+            <!-- 16:00–17:30 -->
+            <div class="event handball" style="top: 160px; height: 90px;">
+                <div class="event-title">Handball</div>
+                <div class="event-time">16:00 – 17:30</div>
             </div>
 
-            <div class="card clase">
-                <div class="event">
-                    <div class="event-left">
-                        <img src="clases.png">
-                        <div class="event-name">Clase: Historia de las Ideas</div>
-                    </div>
-                    <div class="event-time">20:10 – 23:00</div>
-                </div>
+            <!-- 20:10–23:00 -->
+            <div class="event clase" style="top: 250px; height: 170px;">
+                <div class="event-title">Historia</div>
+                <div class="event-time">20:10 – 23:00</div>
             </div>
+
         </div>
+    </div>
 
-        <!-- MARTES -->
-        <div class="day">
-            <div class="day-title">Martes</div>
+    <!-- MARTES -->
+    <div class="day">
+        <div class="day-title">Martes</div>
+        <div class="grid">
 
-            <div class="card profe">
-                <div class="event">
-                    <div class="event-left">
-                        <img src="handballprofe.jpg">
-                        <div class="event-name">Profe de Handball</div>
-                    </div>
-                </div>
+            <div class="event profe" style="top: 200px; height: 60px;">
+                <div class="event-title">Profe</div>
             </div>
+
         </div>
+    </div>
 
-        <!-- MIÉRCOLES -->
-        <div class="day">
-            <div class="day-title">Miércoles</div>
+    <!-- MIÉRCOLES -->
+    <div class="day">
+        <div class="day-title">Miércoles</div>
+        <div class="grid">
 
-            <div class="card handball">
-                <div class="event">
-                    <div class="event-left">
-                        <img src="handball.png">
-                        <div class="event-name">Prácticas Handball - ESTADIO</div>
-                    </div>
-                    <div class="event-time">19:00 – 20:30</div>
-                </div>
+            <div class="event handball" style="top: 220px; height: 90px;">
+                <div class="event-title">Handball</div>
+                <div class="event-time">19:00 – 20:30</div>
             </div>
 
-            <div class="card clase">
-                <div class="event">
-                    <div class="event-left">
-                        <img src="clases.png">
-                        <div class="event-name">Clase: UDI</div>
-                    </div>
-                    <div class="event-time">21:00 – 23:00</div>
-                </div>
+            <div class="event clase" style="top: 300px; height: 120px;">
+                <div class="event-title">UDI</div>
+                <div class="event-time">21:00 – 23:00</div>
             </div>
+
         </div>
+    </div>
 
-        <!-- JUEVES -->
-        <div class="day">
-            <div class="day-title">Jueves</div>
+    <!-- JUEVES -->
+    <div class="day">
+        <div class="day-title">Jueves</div>
+        <div class="grid">
 
-            <div class="card profe">
-                <div class="event">
-                    <div class="event-left">
-                        <img src="handballprofe.jpg">
-                        <div class="event-name">Profe de Handball</div>
-                    </div>
-                </div>
+            <div class="event profe" style="top: 200px; height: 60px;">
+                <div class="event-title">Profe</div>
             </div>
+
         </div>
+    </div>
 
-        <!-- VIERNES -->
-        <div class="day">
-            <div class="day-title">Viernes</div>
+    <!-- VIERNES -->
+    <div class="day">
+        <div class="day-title">Viernes</div>
+        <div class="grid">
 
-            <div class="card handball">
-                <div class="event">
-                    <div class="event-left">
-                        <img src="handball.png">
-                        <div class="event-name">Prácticas Handball - ESTADIO</div>
-                    </div>
-                    <div class="event-time">16:00 – 17:30</div>
-                </div>
+            <div class="event handball" style="top: 160px; height: 90px;">
+                <div class="event-title">Handball</div>
+                <div class="event-time">16:00 – 17:30</div>
             </div>
-        </div>
 
+        </div>
     </div>
 
 </div>
