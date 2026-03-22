@@ -8,8 +8,8 @@
 body {
     margin: 0;
     height: 100vh;
-    font-family: "Segoe UI", -apple-system, sans-serif;
-    background: #121212;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,25 +18,23 @@ body {
 /* CONTENEDOR */
 .window {
     width: 700px;
-    border-radius: 12px;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
     overflow: hidden;
-    background: #181818;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
 }
 
 /* HEADER */
 .header {
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
-    background: #000;
-    border-bottom: 1px solid #282828;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .title {
-    color: #fff;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
+    color: #111;
+    letter-spacing: 0.5px;
 }
 
 /* CONTENIDO */
@@ -48,40 +46,39 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    color: #b3b3b3;
 }
 
 th {
     text-align: left;
     font-weight: 500;
-    color: #b3b3b3;
-    padding-bottom: 12px;
+    color: #999;
     font-size: 12px;
-    text-transform: uppercase;
+    padding-bottom: 10px;
     letter-spacing: 1px;
 }
 
 td {
-    padding: 14px 8px;
+    padding: 16px 8px;
     vertical-align: top;
-    transition: background 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+    transition: 0.2s;
 }
 
-/* FILA HOVER */
+/* HOVER SUTIL */
 tr:hover td {
-    background: #282828;
+    background: #fafafa;
 }
 
 /* DÍA */
 td:first-child {
     width: 120px;
-    color: #fff;
-    font-weight: 600;
+    font-weight: 500;
+    color: #111;
 }
 
 /* ITEM */
 .item {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 /* BADGE */
@@ -89,13 +86,9 @@ td:first-child {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 7px 12px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 500;
-    background: #282828;
-    color: #fff;
-    transition: all 0.2s ease;
+    padding: 6px 0;
+    font-size: 14px;
+    color: #111;
 }
 
 /* ICONO */
@@ -103,39 +96,32 @@ td:first-child {
     width: 16px;
     height: 16px;
     border-radius: 3px;
+    opacity: 0.7;
 }
 
-/* HOVER BADGE */
-.badge:hover {
-    background: #1db954;
-    color: #000;
-    transform: scale(1.04);
-}
-
-/* COLORES ESPECIALES */
+/* LÍNEA IZQUIERDA TIPO TESLA */
 .handball {
-    border: 1px solid #1db954;
+    border-left: 2px solid #111;
+    padding-left: 10px;
 }
 
 .clase {
-    border: 1px solid #535353;
+    border-left: 2px solid #666;
+    padding-left: 10px;
 }
 
 .profe {
-    background: #fff;
-    color: #000;
+    border-left: 2px solid #ccc;
+    padding-left: 10px;
 }
 
 /* HORA */
 .hora {
-    color: #b3b3b3;
+    display: block;
+    margin-left: 26px;
     font-size: 12px;
-    margin-left: 10px;
-}
-
-/* RESALTAR HORA EN HOVER */
-tr:hover .hora {
-    color: #fff;
+    color: #777;
+    margin-top: 2px;
 }
 </style>
 </head>
